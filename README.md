@@ -1,7 +1,7 @@
 Rune
 ===================
 
-Generates an Application's signature based on the following algorithm:
+Generates an signature based on the following algorithm:
 
 * Alphabetize all POST fields
 * Concatinate the key and value of each POST field to eachother, concatinate each 
