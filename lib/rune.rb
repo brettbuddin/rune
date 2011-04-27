@@ -18,7 +18,7 @@ class Rune
   # 
   # Returns the String signature
   def generate
-    data = recursive_stringify_keys(@params).to_a.sort_by{|k| k[0].to_s}.flatten.join
+    data = recursive_to_array(@params).sort_by{|k| k[0].to_s}.flatten.join
     digest = OpenSSL::Digest::Digest.new("sha1")
     Base64.encode64(OpenSSL::HMAC.digest(digest, @auth_token, "#{@url}#{data}")).strip
   end
@@ -35,14 +35,15 @@ class Rune
     hash
   end
 
-  # Recursively apply stringify_keys to a Hash
+  # Recursively apply stringify_keys to a Hash and
+  # turn Hashes into Arrays.
   # 
-  # Returns the Hash that has strings for keys
-  def recursive_stringify_keys(hash)
+  # Returns the Array that has nested Arrays where Hashes used to be
+  def recursive_to_array(hash)
     hash = stringify_keys(hash)
-    hash.values.select{ |v| v.is_a?(Hash) }.each do |h| 
-      recursive_stringify_keys(h)
+    hash.select{ |k,v| v.is_a?(Hash) }.each do |k,v| 
+      hash[k] = recursive_to_array(v).to_a
     end
-    hash
+    hash.to_a
   end
 end
