@@ -18,7 +18,7 @@ class Rune
   # 
   # Returns the String signature
   def generate
-    data = flatten(recursive_stringify_keys(@params)).to_a.sort_by{|k| k[0].to_s}.flatten.join
+    data = recursive_flatten(recursive_stringify_keys(@params)).to_a.sort_by{|k| k[0].to_s}.flatten.join
     digest = OpenSSL::Digest::Digest.new("sha1")
     Base64.encode64(OpenSSL::HMAC.digest(digest, @auth_token, "#{@url}#{data}")).strip
   end
