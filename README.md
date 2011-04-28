@@ -11,7 +11,7 @@ The signature is generated using the following algorithm:
   field name and value to the end of the URL
 * Using the string containing the URL, query string and POST fields, sign them using HMAC-SHA1 and the auth_token as the key.
 
-I suggest providing this signature to your API via an HTTP header like "X-YOUR_API_NAME-Signature".
+*I suggest providing this signature to your API via an HTTP header like "X-YOUR_API_NAME-Signature".*
 
 ## Example Usage
 
