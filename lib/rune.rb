@@ -2,7 +2,7 @@ require 'openssl'
 require 'base64'
 
 class Rune
-  VERSION = Version = '0.1'
+  VERSION = Version = '0.1.1'
 
   attr_accessor :url
   attr_accessor :auth_token
